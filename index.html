@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sadiya ❤️ Asif Saheer</title>
+
+<!-- 💖 Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color: white;
+    background: url('background.jpeg') no-repeat center center/cover;
+    height: 250vh;
+}
+
+/* Overlay */
+.overlay {
+    background: rgba(0,0,0,0.4);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Names */
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    text-shadow: 0 0 12px rgba(255,255,255,0.8);
+}
+
+/* Date */
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+/* Countdown */
+#countdown {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.box {
+    margin: 10px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(6px);
+    min-width: 80px;
+}
+
+.number {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.label {
+    font-size: 12px;
+}
+
+/* 💖 Hearts */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 25px;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* 🎶 Music Button */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    color: #7a2e4d;
+    font-weight: bold;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+    <h1>💖 Sadiya & Asif Saheer 💖</h1>
+    <h2>July 26, 2026</h2>
+
+    <div id="countdown">
+        <div class="box"><div id="days" class="number"></div><div class="label">Days</div></div>
+        <div class="box"><div id="hours" class="number"></div><div class="label">Hours</div></div>
+        <div class="box"><div id="minutes" class="number"></div><div class="label">Minutes</div></div>
+        <div class="box"><div id="seconds" class="number"></div><div class="label">Seconds</div></div>
+    </div>
+</div>
+
+<!-- 🎶 Music -->
+<button class="music-btn" onclick="playMusic()">🎶 Play Music</button>
+
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// ✅ Better Date Fix
+const weddingDate = new Date(2026, 6, 26, 0, 0, 0).getTime();
+
+setInterval(() => {
+    const now = new Date().getTime();
+    const gap = weddingDate - now;
+
+    const d = Math.floor(gap / (1000*60*60*24));
+    const h = Math.floor((gap % (1000*60*60*24))/(1000*60*60));
+    const m = Math.floor((gap % (1000*60*60))/(1000*60));
+    const s = Math.floor((gap % (1000*60))/1000);
+
+    document.getElementById("days").innerText = d;
+    document.getElementById("hours").innerText = h;
+    document.getElementById("minutes").innerText = m;
+    document.getElementById("seconds").innerText = s;
+
+    if (gap < 0) {
+        document.getElementById("countdown").innerHTML = "💍 It's Wedding Time!";
+    }
+}, 1000);
+
+// 💖 Hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+setInterval(createHeart, 300);
+
+// 🎶 Music Play Fix
+function playMusic() {
+    document.getElementById("music").play();
+}
+</script>
+
+</body>
+</html>
